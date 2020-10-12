@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/olivere/elastic/uritemplates"
+	"github.com/SpotIM/elastic/uritemplates"
 )
 
 // ScrollService manages a cursor through documents in Elasticsearch.

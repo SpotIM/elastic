@@ -11,7 +11,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/olivere/elastic/uritemplates"
+	"github.com/SpotIM/elastic/uritemplates"
 )
 
 // UpdateResult is the result of updating a document in Elasticsearch.

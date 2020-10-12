@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/olivere/elastic/uritemplates"
+	"github.com/SpotIM/elastic/uritemplates"
 )
 
 // IndexResult is the result of indexing a document in Elasticsearch.

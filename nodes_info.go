@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/olivere/elastic/uritemplates"
+	"github.com/SpotIM/elastic/uritemplates"
 )
 
 var (

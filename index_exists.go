@@ -7,7 +7,7 @@ package elastic
 import (
 	"fmt"
 
-	"github.com/olivere/elastic/uritemplates"
+	"github.com/SpotIM/elastic/uritemplates"
 )
 
 type IndexExistsService struct {
