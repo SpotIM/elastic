@@ -305,10 +305,10 @@ func NewScanCursor(client *Client, keepAlive string, pretty bool, searchResult *
 // TotalHits is a convenience method that returns the number
 // of hits the cursor will iterate through.
 func (c *ScanCursor) TotalHits() int64 {
-	if c.Results.Hits == nil {
+	if c.Results.Hits == nil && c.Results.Hits.TotalHits != nil {
 		return 0
 	}
-	return c.Results.Hits.TotalHits
+	return c.Results.Hits.TotalHits.Value
 }
 
 // Next returns the next search result or nil when all
@@ -330,7 +330,7 @@ func (c *ScanCursor) TotalHits() int64 {
 //
 func (c *ScanCursor) Next() (*SearchResult, error) {
 	if c.currentPage > 0 {
-		if c.Results.Hits == nil || len(c.Results.Hits.Hits) == 0 || c.Results.Hits.TotalHits == 0 {
+		if c.Results.Hits == nil || len(c.Results.Hits.Hits) == 0 || (c.Results.Hits.TotalHits == nil || c.Results.Hits.TotalHits.Value == 0) {
 			return nil, EOS
 		}
 	}

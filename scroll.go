@@ -211,7 +211,7 @@ func (s *ScrollService) GetNextPage() (*SearchResult, error) {
 	}
 
 	// Determine last page
-	if searchResult == nil || searchResult.Hits == nil || len(searchResult.Hits.Hits) == 0 || searchResult.Hits.TotalHits == 0 {
+	if searchResult == nil || searchResult.Hits == nil || len(searchResult.Hits.Hits) == 0 || (searchResult.Hits.TotalHits == nil || searchResult.Hits.TotalHits.Value == 0) {
 		return nil, EOS
 	}
 
