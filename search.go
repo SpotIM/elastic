@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/olivere/elastic/uritemplates"
+	"github.com/SpotIM/elastic/uritemplates"
 )
 
 // Search for documents in Elasticsearch.
@@ -365,8 +365,9 @@ type SearchResult struct {
 // TotalHits is a convenience function to return the number of hits for
 // a search result.
 func (r *SearchResult) TotalHits() int64 {
-	if r.Hits != nil {
-		return r.Hits.TotalHits
+	// NEVER LET THIS FILE BE UPDATED, IT WILL BREAK THE SEARCHES DUE TO AN UPDATE THAT WE CANNOT GET WITHOUT GO MODULES
+	if r.Hits != nil && r.Hits.TotalHits != nil {
+		return r.Hits.TotalHits.Value
 	}
 	return 0
 }
@@ -390,9 +391,15 @@ func (r *SearchResult) Each(typ reflect.Type) []interface{} {
 
 // SearchHits specifies the list of search hits.
 type SearchHits struct {
-	TotalHits int64        `json:"total"`     // total number of hits found
+	TotalHits *TotalHits   `json:"total,omitempty"`     // total number of hits found
 	MaxScore  *float64     `json:"max_score"` // maximum score of all hits
 	Hits      []*SearchHit `json:"hits"`      // the actual hits returned
+}
+
+// TotalHits specifies total number of hits and its relation
+type TotalHits struct {
+	Value    int64  `json:"value"`    // value of the total hit count
+	Relation string `json:"relation"` // how the value should be interpreted: accurate ("eq") or a lower bound ("gte")
 }
 
 // SearchHit is a single hit.
